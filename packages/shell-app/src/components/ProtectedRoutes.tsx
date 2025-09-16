@@ -14,10 +14,6 @@ const useAuth = () => {
 
 export const routes = [
   {
-    path: '/',
-    element: Layout,
-  },
-  {
     path: '/employeeDirectory',
     element: EmployeeApp,
     isProtected: true
