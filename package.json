@@ -2,9 +2,18 @@
   "name": "enterprise-dashboard",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:shell": "cd packages/shell-app && npm run dev",
+    "dev:employee": "cd packages/employee-directory && npm run preview",
+    "dev:tasks": "cd packages/task-management && npm run preview", 
+    "dev:analytics": "cd packages/analytics && npm run preview",
+    "dev:settings": "cd packages/settings && npm run preview",
+    "build:all": "npm run build:remotes && npm run build:shell",
+    "build:remotes": "concurrently \"cd packages/employee-directory && npm run build\" \"cd packages/task-management && npm run build\" \"cd packages/analytics && npm run build\" \"cd packages/settings && npm run build\"",
+    "build:shell": "cd packages/shell-app && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
   },
   "keywords": [],
   "author": "",
