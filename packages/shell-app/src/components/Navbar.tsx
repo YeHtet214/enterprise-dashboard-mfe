@@ -12,9 +12,6 @@ const Navbar = () => {
           <li>
             <a href="/analytics">Analytics</a>
           </li>
-          <li>
-            <a href="/settings">Settings</a>
-          </li>
         </ul>
 
       </nav>

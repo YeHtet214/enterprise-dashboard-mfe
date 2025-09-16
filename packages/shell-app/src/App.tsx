@@ -1,20 +1,13 @@
-import React from 'react';
-import Header from './components/Header';
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRoutes from "./components/ProtectedRoutes";
 import './App.css';
 
-const EmployeeApp = React.lazy(() => import('employeeDirectory/EmployeeApp'));
-const AnalyticsApp = React.lazy(() => import('analytics/AnalyticsApp'));
-const TaskManagementApp = React.lazy(() => import('taskManagement/TaskApp'));
-
-function App() {
+const App = () => {
   return (
-    <div className="app-container">
-      <Header />
-      <main>
-        
-      </main>
-    </div>
-  );
+    <Router>
+      <AppRoutes />
+    </Router>
+  )
 }
 
 export default App;
