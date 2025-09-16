@@ -1,5 +1,5 @@
 {
-  "name": "settings",
+  "name": "auth-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,13 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@originjs/vite-plugin-federation": "^1.4.1",
+    "jwt-decode": "^4.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.1"
+    "react-router-dom": "^7.9.1",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
-    "@originjs/vite-plugin-federation": "^1.4.1",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",

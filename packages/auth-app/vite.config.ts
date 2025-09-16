@@ -6,18 +6,15 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'settings',
+      name: 'auth-app',
       filename: 'remoteEntry.js',
       exposes: {
-        './SettingsApp': './src/App.tsx',
-        // './UserProfile': './src/components/UserProfile.tsx',
-        // './Preferences': './src/components/Preferences.tsx',
-        // './Security': './src/components/Security.tsx'
+        './AuthApp': './src/App.tsx',
       },
       shared: {
-        'react': { },
+        react: {  },
         'react-dom': {  },
-        'react-router-dom': { }
+        'react-router-dom': {  }
       }
     })
   ],
