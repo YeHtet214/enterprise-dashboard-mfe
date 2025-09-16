@@ -10,9 +10,9 @@ export default defineConfig({
       remotes: {
         // Map of remote names to their entry points
         employeeDirectory: 'http://localhost:5001/assets/remoteEntry.js',
-        // taskManagement: 'http://localhost:5002/assets/remoteEntry.js',
+        taskManagement: 'http://localhost:5002/assets/remoteEntry.js',
         analytics: 'http://localhost:5003/assets/remoteEntry.js',
-        settings: 'http://localhost:5004/assets/remoteEntry.js',
+        // settings: 'http://localhost:5004/assets/remoteEntry.js',
       },
       shared: {
         // Shared dependencies to avoid duplication

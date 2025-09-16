@@ -1,42 +1,110 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-container {
+  display: flex;
+  flex-direction: column;
+  place-items: stretch;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 1rem 2rem;
+  background:rgb(243, 243, 243);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  background: #00023D;
+  color: rgb(243, 243, 243);
+  padding: 1rem 2rem;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+header .user-info {
+  position: relative;
 }
 
-.card {
-  padding: 2em;
+header h1 {
+  font-weight: lighter;
+  font-size: 2.5rem;
 }
 
-.read-the-docs {
-  color: #888;
+header .user-info .outer-cycle {
+  border: 1px solid rgb(243, 243, 243);
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+header .user-info .outer-cycle p {
+  font-size: 0.25rem;
+  font-weight: bold;
+}
+
+header .user-info .outer-cycle:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+header .user-info .outer-cycle button {
+  background-color: transparent;
+  border: none;
+  
+}
+
+header .user-info .logout-btn {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  cursor: pointer;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0.5rem 0;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+nav {
+  background: #292c54;
+  color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+main {
+  background-color: #fff;
+  flex: 1;
+  padding: 1rem 2rem;
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
 }
