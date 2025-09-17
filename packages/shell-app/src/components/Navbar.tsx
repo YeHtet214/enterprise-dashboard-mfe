@@ -4,6 +4,9 @@ const Navbar = () => {
       <nav>
         <ul className="nav-links">
           <li>
+            <a href="/dashboard">Dashboard</a>
+          </li>
+          <li>
             <a href="/employeeDirectory">Employee Directory</a>
           </li>
           <li>
@@ -13,7 +16,6 @@ const Navbar = () => {
             <a href="/analytics">Analytics</a>
           </li>
         </ul>
-
       </nav>
     </div>
   );
