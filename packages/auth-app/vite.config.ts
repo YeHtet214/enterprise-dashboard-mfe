@@ -9,14 +9,9 @@ export default defineConfig({
       name: 'auth-app',
       filename: 'remoteEntry.js',
       exposes: {
-        './AuthApp': './src/App.tsx',
-        './Login': './src/pages/Login.tsx',
+        './AuthApp': './src/index.ts',
       },
-      shared: {
-        react: {  },
-        'react-dom': {  },
-        'react-router-dom': {  }
-      }
+      shared: ["react", "react-dom", "react-router-dom"],
     })
   ],
   build: {
