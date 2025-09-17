@@ -1,11 +1,12 @@
 import React, { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Dashboard from "../pages/Dashboard";
 
 const EmployeeApp = React.lazy(() => import('employeeDirectory/EmployeeApp'));
 const AnalyticsApp = React.lazy(() => import('analytics/AnalyticsApp'));
 const TaskManagementApp = React.lazy(() => import('taskManagement/TaskApp'));
+const Login = React.lazy(() => import('authApp/Login'));
 
 // Later get the Auth from Auth App and use it here
 const useAuth = () => {
@@ -17,6 +18,14 @@ export const routes = [
   {
     path: '/dashboard',
     element: Dashboard
+  },
+  {
+    path: '/login',
+    element: Login
+  },
+  {
+    path: '/login',
+    element: <Login />
   },
   {
     path: '/employeeDirectory',
@@ -35,11 +44,20 @@ export const routes = [
   },
 ];
 
-const AppRoutes = () => {
+const protectedRoutes = routes.filter((route) => route.isProtected);
+const publicRoutes = routes.filter((route) => !route.isProtected);
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuth();
 
-  const protectedRoutes = routes.filter((route) => route.isProtected);
-  const publicRoutes = routes.filter((route) => !route.isProtected);
+  if (isAuthenticated) {
+    return <>{children}</>;
+  } else {
+    return <Navigate to="/" />;
+  }
+
+}
+const AppRoutes = () => {
 
   const createRouteElement = (route: any) => (
     <Suspense fallback={<div>Loading...</div>}>
@@ -47,18 +65,12 @@ const AppRoutes = () => {
     </Suspense>
   );
 
-  publicRoutes.map((route) => (
-    <React.Suspense fallback={<div>Loading...</div>}>
-      <Route key={route.path} path={route.path} element={createRouteElement(route)} />
-    </React.Suspense>
-  ))
-
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />} >
-            {/* Set /dashboard as the default route */}
-            <Route index element={<Dashboard />} />
+          {/* Set /dashboard as the default route */}
+          <Route index element={<Dashboard />} />
           {publicRoutes.map(route => (
             <Route
               key={route.path}
@@ -68,18 +80,18 @@ const AppRoutes = () => {
             />
           ))}
 
-          {isAuthenticated ? (
-            <>
-              {protectedRoutes.map(route => (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={createRouteElement(route)}
-                  errorElement={<div>Error occor on route {route.path}</div>}
-                />
-              ))}
-            </>
-          ) : (<div>Not Authenticated</div>)}
+
+          {protectedRoutes.map(route => (
+            <ProtectedRoute>
+              <Route
+                key={route.path}
+                path={route.path}
+                element={createRouteElement(route)}
+                errorElement={<div>Error occor on route {route.path}</div>}
+              />
+            </ProtectedRoute>
+          ))}
+
         </Route>
       </Routes>
     </>
