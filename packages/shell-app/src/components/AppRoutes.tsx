@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
+import Dashboard from "../pages/Dashboard";
 
 const EmployeeApp = React.lazy(() => import('employeeDirectory/EmployeeApp'));
 const AnalyticsApp = React.lazy(() => import('analytics/AnalyticsApp'));
@@ -13,6 +14,10 @@ const useAuth = () => {
 }
 
 export const routes = [
+  {
+    path: '/dashboard',
+    element: Dashboard
+  },
   {
     path: '/employeeDirectory',
     element: EmployeeApp,
@@ -52,6 +57,8 @@ const AppRoutes = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />} >
+            {/* Set /dashboard as the default route */}
+            <Route index element={<Dashboard />} />
           {publicRoutes.map(route => (
             <Route
               key={route.path}
