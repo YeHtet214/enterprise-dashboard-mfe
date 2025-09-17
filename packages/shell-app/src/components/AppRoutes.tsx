@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, type JSX } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Dashboard from "../pages/Dashboard";
@@ -6,9 +6,8 @@ import Dashboard from "../pages/Dashboard";
 const EmployeeApp = React.lazy(() => import('employeeDirectory/EmployeeApp'));
 const AnalyticsApp = React.lazy(() => import('analytics/AnalyticsApp'));
 const TaskManagementApp = React.lazy(() => import('taskManagement/TaskApp'));
-const Login = React.lazy(() => import('authApp/Login'));
+// const Login = React.lazy(() => import('authApp/Login'));
 
-// Later get the Auth from Auth App and use it here
 const useAuth = () => {
   const isAuthenticated = true;
   return isAuthenticated;
@@ -18,14 +17,6 @@ export const routes = [
   {
     path: '/dashboard',
     element: Dashboard
-  },
-  {
-    path: '/login',
-    element: Login
-  },
-  {
-    path: '/login',
-    element: <Login />
   },
   {
     path: '/employeeDirectory',
@@ -47,15 +38,14 @@ export const routes = [
 const protectedRoutes = routes.filter((route) => route.isProtected);
 const publicRoutes = routes.filter((route) => !route.isProtected);
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const isAuthenticated = useAuth();
 
-  if (isAuthenticated) {
-    return <>{children}</>;
-  } else {
-    return <Navigate to="/" />;
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
   }
 
+  return element;
 }
 const AppRoutes = () => {
 
@@ -80,18 +70,14 @@ const AppRoutes = () => {
             />
           ))}
 
-
           {protectedRoutes.map(route => (
-            <ProtectedRoute>
-              <Route
-                key={route.path}
-                path={route.path}
-                element={createRouteElement(route)}
-                errorElement={<div>Error occor on route {route.path}</div>}
-              />
-            </ProtectedRoute>
+            <Route
+              key={route.path}
+              path={route.path}
+              element={<ProtectedRoute element={createRouteElement(route)} />}
+              errorElement={<div>Error occor on route {route.path}</div>}
+            />
           ))}
-
         </Route>
       </Routes>
     </>
