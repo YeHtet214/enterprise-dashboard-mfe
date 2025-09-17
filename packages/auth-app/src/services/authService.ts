@@ -6,6 +6,8 @@ export async function login(email: string, password: string) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
+
   if (!res.ok) throw new Error("Login failed");
+  
   return res.json();
 }
