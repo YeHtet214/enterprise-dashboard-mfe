@@ -1,64 +1,47 @@
-import { useState } from "react";
-// import "../styles/App.css";
-import { login } from "../services/authService";
-import { saveToken } from "../utils/storage";
+import React, { useState } from "react";
+import { authService } from "../services/authService";
+import { storage } from "../services/storage";
+import "../App.css";
 
-function Login() {
-  const [email, setEmail] = useState("");
+const Login: React.FC = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setLoading(true);
-
     try {
-      const { token } = await login(email, password);
-      saveToken(token);
-
-      // After login, redirect back to shell app
-      window.location.href = "http://localhost:5173"; // shell app URL
+      const { token } = await authService.login(username, password);
+      storage.saveToken(token);
+      window.location.href = "/dashboard"; // redirect after login
     } catch (err) {
-      setError("Invalid email or password");
-    } finally {
-      setLoading(false);
+      setError("Invalid credentials");
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            required
-          />
-
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-
-          {error && <p className="error">{error}</p>}
-        </form>
-      </div>
+    <div className="login-container">
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit} className="login-form">
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        {error && <p className="error">{error}</p>}
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
-}
+};
 
 export default Login;
