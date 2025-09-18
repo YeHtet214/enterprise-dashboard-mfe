@@ -2,17 +2,11 @@ import React, { Suspense, type JSX } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Dashboard from "../pages/Dashboard";
-import { Login } from "authApp/AuthApp";
+import { Login, useAuth } from "authApp/AuthApp";
 
 const EmployeeApp = React.lazy(() => import('employeeDirectory/EmployeeApp'));
 const AnalyticsApp = React.lazy(() => import('analytics/AnalyticsApp'));
 const TaskManagementApp = React.lazy(() => import('taskManagement/TaskApp'));
-// const Login = React.lazy(() => import('authApp/AuthApp'));
-
-const useAuth = () => {
-  const isAuthenticated = true;
-  return isAuthenticated;
-}
 
 export const routes = [
   {
@@ -45,7 +39,9 @@ const protectedRoutes = routes.filter((route) => route.isProtected);
 const publicRoutes = routes.filter((route) => !route.isProtected && !route.authRoute);
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
-  const isAuthenticated = useAuth();
+  const { isAuthenticated } = useAuth();
+
+  console.log("isAuthenticated", isAuthenticated);
 
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;

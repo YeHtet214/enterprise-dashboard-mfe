@@ -12,7 +12,7 @@ type User = {
 }
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User>({ username: "", id: "", role: "" });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => storage.getToken() || false);
 
   useEffect(() => {
     const token = storage.getToken();
