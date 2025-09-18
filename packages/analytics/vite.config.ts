@@ -10,15 +10,13 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './AnalyticsApp': './src/App.tsx',
-        // './Dashboard': './src/components/Dashboard.tsx',
-        // './Charts': './src/components/Charts.tsx',
-        // './MetricsCard': './src/components/MetricsCard.tsx'
       },
-      shared: {
-        react: { },
-        'react-dom': { },
-        'react-router-dom': { }
-      }
+      remotes: {
+        employeeDirectory: 'http://localhost:5001/assets/remoteEntry.js',
+        taskManagement: 'http://localhost:5002/assets/remoteEntry.js',
+        authApp: 'http://localhost:5004/assets/remoteEntry.js',
+      },
+      shared: ["react", "react-dom"]
     })
   ],
   build: {

@@ -13,20 +13,7 @@ export default defineConfig({
         analytics: 'http://localhost:5003/assets/remoteEntry.js',
         authApp: 'http://localhost:5004/assets/remoteEntry.js',
       },
-      shared: {
-        react: { 
-          // singleton: true,      
-          // eager: true          
-        },
-        'react-dom': { 
-          // singleton: true, 
-          // eager: true 
-        },
-        'react-router-dom': {
-          // singleton: true,
-          // eager: true
-        }
-      }
+      shared: ["react", "react-dom"]
     })
   ],
   build: {

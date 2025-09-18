@@ -10,20 +10,12 @@ export default defineConfig({
       filename: 'remoteEntry.js',  
       exposes: {
         './EmployeeApp': './src/App.tsx',
+        './EmployeeContext': './src/context/EmployeeContext.tsx',
       },
       remotes: {
         authApp: 'http://localhost:5004/assets/remoteEntry.js',
       },
-      shared: {
-        'react': { 
-        },
-        'react-dom': { 
-          // Remove the 'singleton' property
-        },
-        'react-router-dom': { 
-          // Remove the 'singleton' property
-        },
-      },
+      shared:["react", "react-dom"]
     })
   ],
   build: {

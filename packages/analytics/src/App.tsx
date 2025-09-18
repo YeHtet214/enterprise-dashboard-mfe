@@ -1,12 +1,35 @@
-import React from 'react';
+import "./App.css";
+import { AnalyticsPage } from "./components/Analytics";
+import { StatsCardContainer } from "./components/StatsCard";
+// @ts-ignore
+import { EmployeeProvider } from "employeeDirectory/EmployeeContext";
+// @ts-ignore
+import { TaskProvider } from "taskManagement/TaskContext";
+// @ts-ignore
+import { AuthProvider } from "authApp/AuthApp";
 
-const AnalyticsApp: React.FC = () => {
+const AnalyticsApp = () => {
+  
+
   return (
-    <div style={{ padding: '20px', border: '2px solid purple', margin: '10px' }}>
-      <h2>📊 Analytics MFE</h2>
-      <p>This is loaded from the Analytics micro-frontend!</p>
-    </div>
+    <AuthProvider>
+      <EmployeeProvider>
+        <TaskProvider>
+          <div className="analytics-container">
+            <h1 className="analytics-title">Analytics Overview</h1>
+
+            <StatsCardContainer />
+
+            <div className="chart-section">
+              {/* <TaskChart /> */}
+              <AnalyticsPage />
+            </div>
+          </div>
+
+        </TaskProvider>
+      </EmployeeProvider>
+    </AuthProvider>
   );
-};
+}
 
 export default AnalyticsApp;

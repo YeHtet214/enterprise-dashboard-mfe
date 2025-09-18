@@ -25,6 +25,16 @@ const users = [
     username: "bob",
     password: bcrypt.hashSync("adminpass", 10),
     role: "admin"
+  },
+  {
+    id: 3,
+    name: "Ronaldo",
+    role: "employee",
+  },
+  {
+    id: 4,
+    name: "Reece Jame",
+    role: "admin",
   }
 ];
 

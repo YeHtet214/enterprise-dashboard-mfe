@@ -6,7 +6,7 @@ export type Task = {
   title: string;
   description: string;
   category: string;
-  completed: boolean;
+  status: "todo" | "in-progress" | "done";
 };
 
 type Role = "admin" | "user";
@@ -14,7 +14,7 @@ type Role = "admin" | "user";
 type TaskContextType = {
   tasks: Task[];
   role: Role;
-  addTask: (task: Omit<Task, "id" | "completed">) => void;
+  addTask: (task: Omit<Task, "id" | "status">) => void;
   toggleTask: (id: number) => void;
   deleteTask: (id: number) => void;
 };
@@ -22,14 +22,14 @@ type TaskContextType = {
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
 const initialTasks: Task[] = [
-  { id: 1, title: "Design UI", description: "Create wireframes for dashboard", category: "Design", completed: false },
-  { id: 2, title: "UX Review", description: "Test user flows for signup", category: "Design", completed: false },
-  { id: 3, title: "API Integration", description: "Connect frontend with backend services", category: "Development", completed: false },
-  { id: 4, title: "Bug Fixes", description: "Resolve navigation issues", category: "Development", completed: true },
-  { id: 5, title: "New Feature", description: "Implement employee search filter", category: "Development", completed: false },
-  { id: 6, title: "Unit Testing", description: "Write Jest tests for Task component", category: "Testing", completed: false },
-  { id: 7, title: "Integration Testing", description: "Test end-to-end flows with Cypress", category: "Testing", completed: false },
-  { id: 8, title: "Regression Testing", description: "Verify fixes didn’t break features", category: "Testing", completed: false },
+  { id: 1, title: "Design UI", description: "Create wireframes for dashboard", category: "Design",status: 'todo' },
+  { id: 2, title: "UX Review", description: "Test user flows for signup", category: "Design",status: 'todo' },
+  { id: 3, title: "API Integration", description: "Connect frontend with backend services", category: "Development", status: 'todo' },
+  { id: 4, title: "Bug Fixes", description: "Resolve navigation issues", category: "Development", status: 'todo' },
+  { id: 5, title: "New Feature", description: "Implement employee search filter", category: "Development",status: 'todo' },
+  { id: 6, title: "Unit Testing", description: "Write Jest tests for Task component", category: "Testing",status: 'todo' },
+  { id: 7, title: "Integration Testing", description: "Test end-to-end flows with Cypress", category: "Testing",status: 'todo' },
+  { id: 8, title: "Regression Testing", description: "Verify fixes didn’t break features", category: "Testing",status: 'todo' },
 ];
 
 
@@ -37,14 +37,14 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const { user } = useAuth();
 
-  const addTask = (task: Omit<Task, "id" | "completed">) => {
-    setTasks(prev => [...prev, { ...task, id: Date.now(), completed: false }]);
+  const addTask = (task: Omit<Task, "id" | "status">) => {
+    setTasks(prev => [...prev, { ...task, id: Date.now(),status: 'todo' }]);
   };
 
   const toggleTask = (id: number) => {
     setTasks(prev =>
       prev.map(task =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+        task.id === id ? { ...task, status: task.status === "todo" ? "in-progress" : task.status === "done" ? "todo" : "done" } : task
       )
     );
   };

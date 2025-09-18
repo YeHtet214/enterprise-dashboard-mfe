@@ -10,15 +10,12 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './TaskApp': './src/App.tsx',
+        './TaskContext': './src/context/TaskContext.tsx',
       },
       remotes: {
         authApp: 'http://localhost:5004/assets/remoteEntry.js',
       },
-      shared: {
-        react: { },
-        'react-dom': { },
-        'react-router-dom': { }
-      }
+      shared: ["react", "react-dom"]
     })
   ],
   build: {

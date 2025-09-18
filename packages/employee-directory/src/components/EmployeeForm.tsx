@@ -12,6 +12,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit, initialData }) =>
   const [form, setForm] = useState<Omit<Employee, "id">>({
     name: "",
     role: "",
+    department: "",
   });
 
   useEffect(() => {
@@ -29,13 +30,14 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit, initialData }) =>
     e.preventDefault();
     if (user.role !== 'admin') return alert('You are not authorized to add employees');
     onSubmit(form);
-    setForm({ name: "", role: "" });
+    setForm({ name: "", role: "", department: "" });
   };
 
   return (
     <form onSubmit={handleSubmit} className="employee-form">
       <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
       <input type="text" name="role" placeholder="Role" value={form.role} onChange={handleChange} required />
+      <input type="text" name="department" placeholder="Department" value={form.department} onChange={handleChange} required />
       <button type="submit" className="btn btn-submit">
         {initialData ? "Update Employee" : "Add Employee"}
       </button>

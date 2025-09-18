@@ -41,8 +41,6 @@ const publicRoutes = routes.filter((route) => !route.isProtected && !route.authR
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { isAuthenticated } = useAuth();
 
-  console.log("isAuthenticated", isAuthenticated);
-
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
   }

@@ -14,6 +14,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee, onEdit, onDelete 
       <div className="employee-info">
         <h3 className="employee-name">{employee.name}</h3>
         <p className="employee-role">{employee.role}</p>
+        <p className="employee-department">{employee.department}</p>
       </div>
       <div className="employee-actions">
         <button className="btn btn-edit"  onClick={() => onEdit(employee)}>Edit</button>

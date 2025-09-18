@@ -4,16 +4,16 @@ const TaskItem = ({ task }: { task: Task }) => {
   const { toggleTask, deleteTask, role } = useTasks();
 
   return (
-    <tr className={task.completed ? "completed" : ""}>
+    <tr className={task.status === "done" ? "completed" : task.status === "todo" ? "pending" : ""}>
       <td>{task.title}</td>
       <td>{task.description}</td>
-      <td>{task.completed ? "Done" : "Pending"}</td>
+      <td>{task.status}</td>
       <td>
         <button
           className="btn btn-primary"
           onClick={() => toggleTask(task.id)}
         >
-          {task.completed ? "Undo" : "Complete"}
+          {task.status === "done" ? "Undo" : task.status === "todo" ? "Start" : "Complete"}
         </button>
         {role === "admin" && (
           <button
