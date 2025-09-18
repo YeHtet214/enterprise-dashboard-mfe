@@ -8,6 +8,7 @@ interface EmployeeCardProps {
 }
 
 const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee, onEdit, onDelete }) => {
+
   return (
     <div className="employee-card">
       <div className="employee-info">
@@ -15,8 +16,8 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee, onEdit, onDelete 
         <p className="employee-role">{employee.role}</p>
       </div>
       <div className="employee-actions">
-        <button className="btn btn-edit" onClick={() => onEdit(employee)}>Edit</button>
-        <button className="btn btn-delete" onClick={() => onDelete(employee.id)}>Delete</button>
+        <button className="btn btn-edit"  onClick={() => onEdit(employee)}>Edit</button>
+        <button className="btn btn-delete"  onClick={() => onDelete(employee.id)}>Delete</button>
       </div>
     </div>
   );

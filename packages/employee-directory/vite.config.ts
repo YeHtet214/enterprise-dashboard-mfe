@@ -10,8 +10,9 @@ export default defineConfig({
       filename: 'remoteEntry.js',  
       exposes: {
         './EmployeeApp': './src/App.tsx',
-        './EmployeeList': './src/components/EmployeeList.tsx',
-        // './EmployeeSearch': './src/components/EmployeeSearch.tsx'
+      },
+      remotes: {
+        authApp: 'http://localhost:5004/assets/remoteEntry.js',
       },
       shared: {
         'react': { 

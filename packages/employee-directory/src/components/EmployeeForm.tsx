@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { type Employee } from "../data/employees";
+import { useAuth } from "authApp/AuthApp";
 
 interface EmployeeFormProps {
   onSubmit: (employee: Omit<Employee, "id">) => void;
@@ -7,6 +8,7 @@ interface EmployeeFormProps {
 }
 
 const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit, initialData }) => {
+  const { user } = useAuth();
   const [form, setForm] = useState<Omit<Employee, "id">>({
     name: "",
     role: "",
@@ -25,6 +27,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit, initialData }) =>
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (user.role !== 'admin') return alert('You are not authorized to add employees');
     onSubmit(form);
     setForm({ name: "", role: "" });
   };

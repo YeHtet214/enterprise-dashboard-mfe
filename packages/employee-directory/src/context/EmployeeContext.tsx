@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { type Employee, initialEmployees } from "../data/employees";
+import { useAuth } from "authApp/AuthApp";
 
 type EmployeeContextType = {
   employees: Employee[];
@@ -12,8 +13,10 @@ const EmployeeContext = createContext<EmployeeContextType | undefined>(undefined
 
 export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [employees, setEmployees] = useState<Employee[]>(initialEmployees);
+  const { user } = useAuth();
 
   const addEmployee = (employee: Omit<Employee, "id">) => {
+    if (user.role !== 'admin') return alert('You are not authorized to add employees');
     setEmployees((prev) => [
       ...prev,
       { id: prev.length > 0 ? prev[prev.length - 1].id + 1 : 1, ...employee },
@@ -21,12 +24,14 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const updateEmployee = (id: number, updated: Partial<Employee>) => {
+    if (user.role !== 'admin') return alert('You are not authorized to add employees');
     setEmployees((prev) =>
       prev.map((emp) => (emp.id === id ? { ...emp, ...updated } : emp))
     );
   };
 
   const removeEmployee = (id: number) => {
+    if (user.role !== 'admin') return alert('You are not authorized to add employees');
     setEmployees((prev) => prev.filter((emp) => emp.id !== id));
   };
 
