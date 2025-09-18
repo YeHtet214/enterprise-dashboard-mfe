@@ -1,12 +1,16 @@
-import React from 'react';
+import { TaskProvider } from "./context/TaskContext";
+import TaskPage from "./pages/TaskPage";
+import "./App.css";
+import { AuthProvider } from "authApp/AuthApp";
 
-const TaskApp: React.FC = () => {
+function App() {
   return (
-    <div style={{ padding: '20px', border: '2px solid green', margin: '10px' }}>
-      <h2>✅ Task Management MFE</h2>
-      <p>This is loaded from the Task Management micro-frontend!</p>
-    </div>
+    <AuthProvider>
+      <TaskProvider>
+        <TaskPage />
+      </TaskProvider>
+    </AuthProvider>
   );
-};
+}
 
-export default TaskApp;
+export default App;

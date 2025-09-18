@@ -10,9 +10,9 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './TaskApp': './src/App.tsx',
-        './TaskBoard': './src/components/TaskBoard.tsx',
-        './TaskList': './src/components/TaskList.tsx',
-        './CreateTask': './src/components/CreateTask.tsx'
+      },
+      remotes: {
+        authApp: 'http://localhost:5004/assets/remoteEntry.js',
       },
       shared: {
         react: { },
