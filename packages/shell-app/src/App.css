@@ -14,29 +14,45 @@
   background:rgb(243, 243, 243);
 }
 
+header {
+  position: relative;
+}
+
 .header-layout {
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   background: #00023D;
   color: rgb(243, 243, 243);
   padding: 1rem 2rem;
   border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;
+  z-index: 100;
+}
+
+header .logo {
+  color: #d6d6d5;
+}
+
+header .logo p {
+  font-size: 5px !important;
+  font-weight: lighter !important;
+}
+
+header .logo h1 {
+  font-weight: lighter;
+  font-size: 0.6rem;
 }
 
 header .user-info {
-  position: relative;
-}
-
-header h1 {
-  font-weight: lighter;
-  font-size: 2.5rem;
+  z-index: 100
 }
 
 header .user-info .outer-cycle {
-  border: 1px solid rgb(243, 243, 243);
+  border: 1px solid #a3d71e;
   border-radius: 50%;
   width: 4rem;
   height: 4rem;
@@ -49,27 +65,48 @@ header .user-info .outer-cycle {
 header .user-info .outer-cycle p {
   font-size: 0.25rem;
   font-weight: bold;
+  color: #d6d6d5
 }
 
 header .user-info .outer-cycle:hover {
   cursor: pointer;
-  transform: scale(1.05);
+  border: 2px solid #a3d71e;
 }
 
 header .user-info .outer-cycle button {
   background-color: transparent;
-  border: none;
-  
+  border: none
 }
 
-header .user-info .logout-btn {
+header .logout-btn-wrapper {
   position: absolute;
-  bottom: -100%;
-  left: 0;
+  top: 5px;
+  right: 10px;
+  z-index: 90;
+  transition: ease-in-out 0.2s;
+}
+
+header .slide {
+  top: 100% !important;
+  transform: translateY(-100%);
+}
+
+header .logout-btn-wrapper .logout-btn {
   cursor: pointer;
-  transform: translateX(-50%);
-  background: white;
+  background: #00023D;
   border: 1px solid;
+  border: 1px solid #d6d6d5;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.25rem;
+  font-weight: bold;
+  color: #d6d6d5
+}
+
+header .logout-btn-wrapper .logout-btn:hover {
+  background: #d6d6d5;
+  color: #00023D;
 }
 
 .nav-links {
@@ -79,7 +116,7 @@ header .user-info .logout-btn {
   justify-content: center;
   align-items: center;
   list-style: none;
-  padding: 0.5rem 0;
+  padding: 0.7rem 0;
 }
 
 .nav-links a {

@@ -2,11 +2,12 @@ import React, { Suspense, type JSX } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Dashboard from "../pages/Dashboard";
+import { Login } from "authApp/AuthApp";
 
 const EmployeeApp = React.lazy(() => import('employeeDirectory/EmployeeApp'));
 const AnalyticsApp = React.lazy(() => import('analytics/AnalyticsApp'));
 const TaskManagementApp = React.lazy(() => import('taskManagement/TaskApp'));
-// const Login = React.lazy(() => import('authApp/Login'));
+// const Login = React.lazy(() => import('authApp/AuthApp'));
 
 const useAuth = () => {
   const isAuthenticated = true;
@@ -33,10 +34,15 @@ export const routes = [
     element: AnalyticsApp,
     isProtected: true
   },
+  {
+    path: '/login',
+    element: Login,
+    authRoute: true
+  }
 ];
 
 const protectedRoutes = routes.filter((route) => route.isProtected);
-const publicRoutes = routes.filter((route) => !route.isProtected);
+const publicRoutes = routes.filter((route) => !route.isProtected && !route.authRoute);
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const isAuthenticated = useAuth();
@@ -79,6 +85,7 @@ const AppRoutes = () => {
             />
           ))}
         </Route>
+        <Route key="login" element={<Login />} path="/login" />
       </Routes>
     </>
   );

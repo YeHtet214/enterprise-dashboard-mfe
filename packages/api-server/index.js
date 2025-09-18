@@ -32,6 +32,8 @@ const users = [
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
+  console.log(username, password)
+
   const user = users.find(u => u.username === username);
   if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
@@ -44,7 +46,7 @@ app.post("/login", (req, res) => {
     { expiresIn: "1h" }
   );
 
-  res.json({ token });
+  res.json({ token, username });
 });
 
 app.get("/protected", (req, res) => {

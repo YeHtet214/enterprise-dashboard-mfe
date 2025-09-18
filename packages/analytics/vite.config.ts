@@ -28,6 +28,7 @@ export default defineConfig({
     cssCodeSplit: false
   },
   preview: {
-    port: 5003
+    port: 5003,
+    strictPort: true
   }
 })

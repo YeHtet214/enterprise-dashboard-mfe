@@ -15,9 +15,9 @@ export default defineConfig({
         './CreateTask': './src/components/CreateTask.tsx'
       },
       shared: {
-        react: { singleton: true },
-        'react-dom': { singleton: true },
-        'react-router-dom': { singleton: true }
+        react: { },
+        'react-dom': { },
+        'react-router-dom': { }
       }
     })
   ],
@@ -28,6 +28,7 @@ export default defineConfig({
     cssCodeSplit: false
   },
   preview: {
-    port: 5002
+    port: 5002,
+    strictPort: true
   }
 })

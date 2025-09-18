@@ -6,21 +6,31 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'auth-app',
+      name: 'authApp',
       filename: 'remoteEntry.js',
-      exposes: {
+     exposes: {
         './AuthApp': './src/index.ts',
       },
-      shared: ["react", "react-dom", "react-router-dom"],
+      shared: {
+        react: { },
+        'react-dom': { },
+        'react-router-dom': { }
+      }
     })
   ],
   build: {
     modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false
+    cssCodeSplit: false,
+    rollupOptions: {
+    output: {
+      format: 'esm',
+    },
+  },
   },
   preview: {
-    port: 5004
+    port: 5004,
+    strictPort: true
   }
 })

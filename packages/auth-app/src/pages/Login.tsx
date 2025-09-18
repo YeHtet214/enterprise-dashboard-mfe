@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import { authService } from "../services/authService";
-import { storage } from "../services/storage";
 import "../App.css";
+import { useAuth } from "../context/AuthContext";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { token } = await authService.login(username, password);
-      storage.saveToken(token);
-      window.location.href = "/dashboard"; // redirect after login
+      await login(username, password);
+      window.location.href = "/dashboard";
     } catch (err) {
       setError("Invalid credentials");
     }

@@ -2,8 +2,8 @@ const currentImports = {};
       const exportSet = new Set(['Module', '__esModule', 'default', '_export_sfc']);
       let moduleMap = {
 "./AuthApp":()=>{
-      dynamicLoadingCss(["style-CcPg0-rf.css"], false, './AuthApp');
-      return __federation_import('./__federation_expose_AuthApp-Brtnum9S.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
+      dynamicLoadingCss(["style-Csonkf_d.css"], false, './AuthApp');
+      return __federation_import('./__federation_expose_AuthApp-B0nHznjw.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
       const seen = {};
       const dynamicLoadingCss = (cssFilePaths, dontAppendStylesToHead, exposeItemName) => {
         const metaUrl = import.meta.url;
@@ -44,7 +44,7 @@ const currentImports = {};
          }
          
           if (dontAppendStylesToHead) {
-            const key = 'css__task-management__' + exposeItemName;
+            const key = 'css__authApp__' + exposeItemName;
             window[key] = window[key] || [];
             window[key].push(href);
             return;
