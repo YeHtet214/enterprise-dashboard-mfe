@@ -3,7 +3,7 @@ const currentImports = {};
       let moduleMap = {
 "./AuthApp":()=>{
       dynamicLoadingCss(["style-Csonkf_d.css"], false, './AuthApp');
-      return __federation_import('./__federation_expose_AuthApp-B0nHznjw.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
+      return __federation_import('./__federation_expose_AuthApp-BMVQOR_w.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
       const seen = {};
       const dynamicLoadingCss = (cssFilePaths, dontAppendStylesToHead, exposeItemName) => {
         const metaUrl = import.meta.url;

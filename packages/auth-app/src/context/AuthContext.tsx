@@ -12,12 +12,14 @@ type User = {
 }
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User>({ username: "", id: "", role: "" });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const token = storage.getToken();
     if (token) {
       const { username, id, role } = JSON.parse(atob(token.split('.')[1]));
       setUser({ username, id, role });
+      setIsAuthenticated(true);
     }
   }, []);
 
@@ -26,15 +28,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     storage.saveToken(token);
     const { username, id, role } = JSON.parse(atob(token.split('.')[1]));
     setUser({ username, id, role });
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
     storage.removeToken();
     setUser({ username: "", id: "", role: "" });
+    setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
