@@ -1,10 +1,16 @@
-const EmployeeApp: React.FC = () => {
+import './App.css';
+import EmployeeList from "./components/EmployeeList";
+import { EmployeeProvider } from './context/EmployeeContext';
+
+const EmployeeDirectory = () => {
   return (
-    <div style={{ padding: '20px', border: '2px solid blue', margin: '10px' }}>
-      <h2>🧑‍💼 Employee Directory MFE</h2>
-      <p>This is loaded from the Employee Directory micro-frontend!</p>
-    </div>
+    <EmployeeProvider>
+      <div className="employee-directory">
+        <h1 className="page-title">Employee Directory</h1>
+        <EmployeeList />
+      </div>
+    </EmployeeProvider>
   );
 };
 
-export default EmployeeApp;
+export default EmployeeDirectory;
