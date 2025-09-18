@@ -12,7 +12,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       await login(username, password);
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } catch (err) {
       setError("Invalid credentials");
     }

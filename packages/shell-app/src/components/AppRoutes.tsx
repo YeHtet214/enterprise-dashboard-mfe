@@ -1,8 +1,8 @@
 import React, { Suspense, type JSX } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
-import Dashboard from "../pages/Dashboard";
 import { Login, useAuth } from "authApp/AuthApp";
+import HomePage from "../pages/HomePage";
 
 const EmployeeApp = React.lazy(() => import('employeeDirectory/EmployeeApp'));
 const AnalyticsApp = React.lazy(() => import('analytics/AnalyticsApp'));
@@ -10,8 +10,9 @@ const TaskManagementApp = React.lazy(() => import('taskManagement/TaskApp'));
 
 export const routes = [
   {
-    path: '/dashboard',
-    element: Dashboard
+    path: '/',
+    element: HomePage,
+    isProtected: false
   },
   {
     path: '/employeeDirectory',
@@ -60,7 +61,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Layout />} >
           {/* Set /dashboard as the default route */}
-          <Route index element={<Dashboard />} />
+          <Route index element={<HomePage />} />
           {publicRoutes.map(route => (
             <Route
               key={route.path}
